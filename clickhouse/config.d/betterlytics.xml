@@ -1,0 +1,32 @@
+<clickhouse>
+    <!--
+      Logs go to the console so they reach Railway's deploy log. Upstream's
+      self-host config sets <console>false</console>, which on Railway means a
+      ClickHouse that never says anything: a failing authentication, a rejected
+      query and a clean boot look identical from the dashboard.
+    -->
+    <logger>
+        <level>information</level>
+        <console>true</console>
+        <log remove="remove"/>
+        <errorlog remove="remove"/>
+    </logger>
+
+    <profiles>
+        <default>
+            <!-- max_threads is written per boot from the container's cgroup CPU
+                 quota by /railway-entrypoint.sh, so it is deliberately absent here. -->
+            <mark_cache_size>536870912</mark_cache_size>
+            <max_block_size>8192</max_block_size>
+        </default>
+    </profiles>
+
+    <!--
+      There is deliberately NO <user_directories> override. Upstream's self-host
+      config points local_directory at /etc/clickhouse-server/users.d/ and its
+      compose file mounts that path as a second volume; a Railway service has one
+      volume, so the same override puts every SQL-created user in the image layer
+      and loses it on the next deploy. The stock default keeps them under
+      /var/lib/clickhouse/access, which is on the volume.
+    -->
+</clickhouse>
