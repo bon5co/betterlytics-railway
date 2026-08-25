@@ -19,6 +19,7 @@ RUN set -eux; \
 COPY nginx.conf /etc/nginx/templates/nginx.conf
 COPY supervisord.conf /etc/supervisor/conf.d/betterlytics.conf
 COPY seed-admin.js /usr/local/bin/seed-admin.js
+COPY exit-on-fatal.js /usr/local/bin/exit-on-fatal.js
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 

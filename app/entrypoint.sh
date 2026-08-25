@@ -121,4 +121,13 @@ export PORT
 envsubst '${PORT}' < /etc/nginx/templates/nginx.conf > /etc/nginx/conf.d/default.conf
 
 echo "[betterlytics] starting services..."
-exec /usr/bin/supervisord -c /etc/supervisor/conf.d/betterlytics.conf
+rm -f /run/betterlytics-fatal
+/usr/bin/supervisord -c /etc/supervisor/conf.d/betterlytics.conf
+rc=$?
+
+if [ -f /run/betterlytics-fatal ]; then
+    echo "[betterlytics] $(cat /run/betterlytics-fatal) died permanently; exiting non-zero so the deploy fails"
+    exit 1
+fi
+
+exit "$rc"
