@@ -1,5 +1,9 @@
 # betterlytics-railway
 
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/betterlytics-or-just-updated-cookieless-?referralCode=Z1xivh&utm_medium=integration&utm_source=template&utm_campaign=generic)
+
+**Deploy on Railway:** [Betterlytics template](https://railway.com/deploy/betterlytics-or-just-updated-cookieless-?referralCode=Z1xivh&utm_medium=integration&utm_source=template&utm_campaign=generic)
+
 Railway wrapper images for [Betterlytics](https://github.com/betterlytics/betterlytics), the
 cookieless, privacy-first web analytics platform (a self-hosted Plausible / Google Analytics
 alternative backed by ClickHouse).
